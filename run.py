@@ -3,9 +3,6 @@ from threading import Thread
 from highrise.__main__ import *
 import time
 import os 
-import json
-
-
 class WebServer():
 
   def __init__(self):
@@ -24,7 +21,7 @@ class WebServer():
 
 
 class RunBot():
-  room_id = os.environ['Room_Id']
+  room_id = os.environ['Room_id']
   bot_token = os.environ['Token']
   bot_file = "main"
   bot_class = "Bot"
