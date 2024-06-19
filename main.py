@@ -472,7 +472,7 @@ class Bot(BaseBot):
                         await self.highrise.teleport(user_id, Position(3.5,2.5,28.5))  
                 elif message.lower().startswith(('-tele')) and  message.lower().endswith(("dj")) :
                     if user.username.lower() in self.moderators :
-                        await self.highrise.teleport(user_id, Position(11,14.5,7))   
+                        await self.highrise.teleport(user_id, Position(11,16.5,7))   
             except Exception as e:
              print(f"An exception occurred[Due To {parts[0][1:]}]: {e}")
 
@@ -537,7 +537,7 @@ class Bot(BaseBot):
                await self.top_tippers()
          if message.lower().startswith(('-dj')) : 
             if user.username.lower() in self.moderators :
-               await self.highrise.teleport(user.id, Position(11.5, 14.5,6))
+               await self.highrise.teleport(user.id, Position(11.5, 16.5,6))
             else:
                await self.highrise.send_whisper((user.id)," this is a privet place for MODs")
          if message.lower().startswith(('-vip')) : 
