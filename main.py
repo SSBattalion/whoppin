@@ -587,12 +587,12 @@ class Bot(BaseBot):
               emote_text, emote_time = await self.get_emote_E(E)    
               tasks = [asyncio.create_task(self.highrise.send_emote(emote_text, user.id))]
               await asyncio.wait(tasks)
-        if message == "-fit":
-         shirt = ["shirt-n_room12019buttondownblack"]
-         pant = ["pants-n_room12019blackacidwashjeans"]
-         item_top = random.choice(shirt)
-         item_bottom = random.choice(pant)
-         xox = await self.highrise.set_outfit(outfit=[
+         if message == "-fit":
+          shirt = ["shirt-n_room12019buttondownblack"]
+          pant = ["pants-n_room12019blackacidwashjeans"]
+          item_top = random.choice(shirt)
+          item_bottom = random.choice(pant)
+          xox = await self.highrise.set_outfit(outfit=[
          Item(type='clothing', 
           amount=1, 
           id='body-flesh',
@@ -656,7 +656,7 @@ class Bot(BaseBot):
         account_bound=False,
         active_palette=-1)
 
-      ]) 
+        ]) 
 
 
          if  message.lower().startswith("-wallet"):
