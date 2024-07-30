@@ -175,7 +175,7 @@ class Bot(BaseBot):
          self.load_temporary_vips()
          self.load_moderators()
          self.load_membership()
-         await asyncio.sleep(10)
+         await asyncio.sleep(15)
          await self.highrise.chat(f"Deployed")
          if Counter.bot_id not in self.dancer:
            self.dancer.append(Counter.bot_id)
