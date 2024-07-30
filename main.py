@@ -19,8 +19,9 @@ from highrise.__main__ import *
 import asyncio, random
 from emotes import Emotes
 from emotes import Dance_Floor
-owners = ['alionardo_','the_realcat']
-moderators = ['alionardo_','the_realcat']
+owners = ['alionardo_','lufian','louivillie']
+moderators = ['alionardo_','lufian','louivillie']
+
 
 class BotDefinition:
     
@@ -58,12 +59,12 @@ class Bot(BaseBot):
         #conversation id var
         self.convo_id_registry = []
         #dance floor position
-        min_x = 1.5
-        max_x = 6.5
-        min_y = 8
-        max_y = 9
-        min_z = 11.5
-        max_z = 26.5
+        min_x = 6.5
+        max_x = 8.5
+        min_y = 0
+        max_y = 1
+        min_z = 12
+        max_z = 20
 
         self.dance_floor_pos = [(min_x, max_x, min_y, max_y, min_z, max_z)]
 
@@ -168,10 +169,9 @@ class Bot(BaseBot):
     async def on_start(self, session_metadata: SessionMetadata) -> None:
       try:
          Counter.bot_id = session_metadata.user_id
-         print("Ali is booting ...")
-       
-
-         self.highrise.tg.create_task(self.highrise.walk_to(Position(13.5,3,3.5, facing='FrontLeft')))
+         print("Ali is booting ...") 
+         asyncio.create_task(self.dance_floor())
+         self.highrise.tg.create_task(self.highrise.walk_to(Position(4.5, 0.25,1.5, facing='FrontRight')))
          self.load_temporary_vips()
          self.load_moderators()
          self.load_membership()
@@ -192,7 +192,7 @@ class Bot(BaseBot):
             title = ""
             if user.username in self.membership:
                 title = self.get_title(user.username, self.membership[user.username]["amount"])
-                await self.highrise.send_whisper(user.id, f"\nThe {title} {user.username} in the house!\n Welcome to Club 808\n• !list or -list :To discover our room.")
+                await self.highrise.send_whisper(user.id, f"\nThe {title} {user.username} in the house!\n Welcome to Ur Fav Hangout Spot \n• !list or -list :To discover our room.")
                 await self.highrise.send_emote('emote-salute')
             elif user.username in moderators:
                  title = "Owners member"
@@ -400,7 +400,7 @@ class Bot(BaseBot):
          if message == "-teleports" or message =="!teleports" :
                     await self.highrise.chat(f"\n • Teleports\n ____________________________\n-g or -floor1: Ground floor \n-floor2 or -2 :Second floor  \n-vip or -v : (vip only), make sure you have 🎫VIP Tickets 🎫 \n• type -buy or !buy for details ")
          if message.lower().lstrip().startswith(("!rules", "-rules")):
-           await self.highrise.chat(f"\n\n        RULES\n ____________________________\n 1. NO UNDERAGE \n 2. No advertising\n 3. No hate speech \n 4. No begging (those trash will be immediately banned 🚫) \n 5. No spamming ")
+                    await self.highrise.chat(f"\n\n        COMMUNITY GUIDELINES\n ____________________________\n 1. Respect all members.\n 2. Keep it family-friendly.\n 3. No begging or soliciting.\n 4. No spamming or flooding.\n 5. Follow moderator instructions.")
          if message.lower().lstrip().startswith(("-feedback", "!feedback")):
                     await self.highrise.send_whisper(user.id, "• [ Submit Feedback ]\\Thank you for joining our room! \n We value your feedback,")
                     await self.highrise.send_whisper(user.id,"Please share your feedback/suggestions with @stonedzillia9 to improve our environment. Your contributions are valuable and will help us improve.")  
@@ -460,18 +460,18 @@ class Bot(BaseBot):
                       target_username = user_name
                       if target_username not in owners :
                           await self.teleport_user_next_to(target_username, user)
-                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("vip")) :
+                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("vip","-4","4","floor 4")) :
                     if user.username.lower() in self.moderators :
-                        await self.highrise.teleport(user_id, Position(13.5, 5,13))
-                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("icon")) :
+                        await self.highrise.teleport(user_id, Position(15,20.1,3))
+                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("-3","3","floor 3")) :
                     if user.username.lower() in self.moderators :
-                        await self.highrise.teleport(user_id, Position(14.5,12,19.5))
-                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("g","1","floor1")) :
+                        await self.highrise.teleport(user_id, Position(11.5,15,6.5))
+                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("g","1","floor 1","-g","-1")) :
                     if user.username.lower() in self.moderators :
-                        await self.highrise.teleport(user_id, Position(4.5,3,7.5))  
-                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("dj")) :
+                        await self.highrise.teleport(user_id, Position(10.5,0.5,7.5))  
+                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("-2","2","floor 2")) :
                     if user.username.lower() in self.moderators :
-                        await self.highrise.teleport(user_id, Position(9.5,12,6))   
+                        await self.highrise.teleport(user_id, Position(10.5,8.25,7.5))  
             except Exception as e:
              print(f"An exception occurred[Due To {parts[0][1:]}]: {e}")
 
@@ -534,26 +534,19 @@ class Bot(BaseBot):
                await self.show_profile(user)
          if message.lower().startswith(("-top tippers","!top tippers")):
                await self.top_tippers()
-         if message.lower().startswith(('-dj')) : 
-            if user.username.lower() in self.moderators :
-               await self.highrise.teleport(user.id, Position(9.5,12,6))
-            else:
-               await self.highrise.send_whisper((user.id)," this is a privet place for MODs")
-         if message.lower().startswith(('-vip')) : 
+         if message.lower().startswith(('-4','-floor 4','-vip','vip')) : 
             if user.username.lower() in self.moderators or (user.username in self.membership and self.get_rank(self.membership[user.username]["amount"]) in ["VIP","Icon"]):
-               await self.highrise.teleport(user.id, Position(13.5, 5,13)) 
+               await self.highrise.teleport(user.id, Position(15,20.1,3))
             else:
-               await self.highrise.send_whisper((user.id)," this is a privet place for VIP ranks, and ranks above.")
-         if message.lower().startswith(('-icon')) :
-            if user.username.lower() in self.moderators or (user.username in self.membership and self.get_rank(self.membership[user.username]["amount"]) in ["Icon"]):
-               await self.highrise.teleport(user.id, Position(14.5,12,19.5)) 
-            else:
-               await self.highrise.send_whisper((user.id)," this is a privet place for Icon ranks VIPs and ranks above.")
-        
-         if message.startswith(('-floor1','-g','-1')):
+               await self.highrise.send_whisper((user.id)," this is a privet place for MODs and VIPs")
+         if message.lower().startswith(('-3','-floor 3')) : 
+               await self.highrise.teleport(user.id, Position(11.5,15,6.5)) 
+         if message.lower().startswith(('-2','-floor 2')) :
+               await self.highrise.teleport(user.id, Position(10.5,8.25,7.5)) 
+         if message.startswith(('-floor 1','-g','-1')):
              parts = message.split()
              if len(parts) == 1:
-                await self.highrise.teleport(f"{user.id}", Position(4.5,3,7.5))
+                await self.highrise.teleport(f"{user.id}", Position(10.5,0.5,7.5))
            
          if message.lower().startswith("loop"):
            parts = message.split()
@@ -899,7 +892,7 @@ class Bot(BaseBot):
         if rank == "Guest":
             return "Our Guest"
         elif rank == "Regular":
-            return "Our Regular vip"
+            return "Our Repeater guest"
         elif rank == "VIP":
             return "Our VIP"
         elif rank == "Icon":
