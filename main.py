@@ -392,7 +392,21 @@ class Bot(BaseBot):
               await self.highrise.send_whisper(user.id,"Only Admins are eligible to veiw.")  
              
          
+         if message.author.username.lower() in self.moderators:
+             if message.lower().lstrip().startswith(("!dancefloor on", "-dancefloor on")):
+                  if self.dance_floor_enabled:
+                     await self.highrise.chat("Emote floor is already enabled!")
+                  else:
+                    self.dance_floor_enabled = True
+                    asyncio.create_task(self.dance_floor())
+                    await self.highrise.chat("Emote floor is now enabled!")
 
+             if message.lower().lstrip().startswith(("!dancefloor off", "-dancefloor off")):
+                  if not self.dance_floor_enabled:
+                     await self.highrise.chat("Emote floor is already disabled!")
+                  else:
+                    self.dance_floor_enabled = False
+                    await self.highrise.chat("Emote floor is now disabled!")
          if message.lower().lstrip().startswith(("-list", "!list")):
                 await self.highrise.chat("\\commands you can use:\n• !profile or -profile\n• -top tippers or !top tippers \n• !teleports or -teleports \n • !mod or -mod(Only mods)\n• !admin or -admin(Only admins) ")
 
@@ -770,29 +784,25 @@ class Bot(BaseBot):
   
   
     def get_rank(self, amount: int) -> str:
-        if amount < 100:
-            return "Guest"
-        elif amount < 500:
-            return "Regular"
-        elif amount < 2500:
-            return "VIP"
-        elif amount < 7500:
-            return "Icon"
-        else:
-            return "Icon"
-
+       """Returns the rank based on the amount."""
+       if amount < 100:
+        return "Guest"
+       elif 100 <= amount < 500:
+        return "Repeater Guest"
+       elif 500 <= amount < 1000:
+        return "VIP"
+       else:
+        return "Icon"
     def get_title(self, username: str, amount: int) -> str:
-        rank = self.get_rank(amount)
-        if rank == "Guest":
-            return "Guest"
-        elif rank == "Regular":
-            return "Regular"
-        elif rank == "VIP":
-            return "VIP"
-        elif rank == "Icon":
-            return "Icon"
-        else:
-            return "Icon"    
+      rank = self.get_rank(amount)
+      if rank == "Guest":
+        return "Our Guest"
+      elif rank == "Repeater Guest":
+        return "Our Repeater Guest"
+      elif rank == "VIP":
+        return "Our VIP"
+      elif rank == "Icon":
+        return "The Icon"    
     async def top_tippers(self, limit: int = 10) -> None:
         top_tippers_list = []
         for username, info in self.membership.items():
@@ -832,15 +842,7 @@ class Bot(BaseBot):
         else:
             await self.highrise.send_whisper(user.id, "You don't have a profile yet. Start tipping gold to earn titles!")
 
-    def get_next_title_amount(self, amount: int) -> int:
-        if amount < 100:
-            return 100
-        elif amount < 1000:
-            return 1000
-        elif amount < 10000:
-            return 10000
-        else:
-            return 100000
+    
            
     async def on_tip(self, sender: User, receiver: User, tip: CurrencyItem) -> None:
         try:
@@ -876,29 +878,17 @@ class Bot(BaseBot):
         else:
             return None
     def get_amount_from_rank(self, rank: str) -> int:
-        if rank == "Guest":
-            return 0
-        elif rank == "Regular":
-            return 500
-        elif rank == "VIP":
-            return 2500
-        elif rank == "Icon":
-            return 7500
-        else:
-            return 7500
-
-    def get_title(self, username: str, amount: int) -> str:
-        rank = self.get_rank(amount)
-        if rank == "Guest":
-            return "Our Guest"
-        elif rank == "Regular":
-            return "Our Repeater guest"
-        elif rank == "VIP":
-            return "Our VIP"
-        elif rank == "Icon":
-            return "The Icon"
-        else:
-            return "The Icon"
+    """Returns the minimum amount required to achieve a certain rank."""
+      if rank == "Guest":
+        return 0
+      elif rank == "Repeater Guest":
+        return 100
+      elif rank == "VIP":
+        return 500
+      elif rank == "Icon":
+        return 1000
+      else:
+        return 0  # or some other default value
     async def on_user_move(self, user: User, pos: Position | AnchorPosition) -> None:
       if user.username == " Alionardo_":
          print(f"{user.username}: {pos}")
