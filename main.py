@@ -392,7 +392,7 @@ class Bot(BaseBot):
               await self.highrise.send_whisper(user.id,"Only Admins are eligible to veiw.")  
              
          
-         if message.author.username.lower() in self.moderators:
+         if user.username.lower() in self.moderators:
              if message.lower().lstrip().startswith(("!dancefloor on", "-dancefloor on")):
                   if self.dance_floor_enabled:
                      await self.highrise.chat("Emote floor is already enabled!")
