@@ -381,9 +381,9 @@ class Bot(BaseBot):
                 await  self.highrise.send_whisper(user.id, f"Only Admins and mods are eligible to tip.")
          if message.lower().lstrip().startswith(("-emotes", "!emotes")):
                 await self.highrise.send_whisper(user.id, "\n• Emote can be used by NUMBERS")
-                await self.highrise.send_whisper(user.id, "\n• For loops say -loop or !loop then the emote number.")         
+                await self.highrise.send_whisper(user.id, "\n• For loops type -loop before the emote number.\n-stop loop : to stop")         
          if message.lower().lstrip().startswith(("!loop","-loop")):
-          await self.highrise.send_whisper(user.id,"\n• loops\n ____________________________\nMention loop before the emote numer\n ____________________________")
+          await self.highrise.send_whisper(user.id,"\n• loops\n ____________________________\nMention -loop before the emote numer\n ____________________________")
          if message.lower().lstrip().startswith(("!admin","-admin")):
            if user.username.lower() in moderators :
              await self.highrise.send_whisper(user.id,"\n____________________________\n• Give mod & vip :\n-give @ mod \n-give @ mod 24h\n-upgrade @ \n• Remove mod\vop\n-remove @ mod\vip\n• Advertising\n-announce + text\n-clear\n ____________________________")
@@ -412,12 +412,12 @@ class Bot(BaseBot):
 
     
          if message == "-teleports" or message =="!teleports" :
-                    await self.highrise.chat(f"\n • Teleports\n ____________________________\n-g or -floor1: Ground floor \n-floor2 or -2 :Second floor  \n-vip or -v : (vip only), make sure you have 🎫VIP Tickets 🎫 \n• type -buy or !buy for details ")
+                    await self.highrise.chat(f"\n • Teleports\n ____________________________\n-g or -floor 1: Ground floor \n-floor 2 or -2 :Second floor\n-floor 3 or -3 :Third floor \n-vip or -v : (vip rank or above)")
          if message.lower().lstrip().startswith(("!rules", "-rules")):
                     await self.highrise.chat(f"\n\n        COMMUNITY GUIDELINES\n ____________________________\n 1. Respect all members.\n 2. Keep it family-friendly.\n 3. No begging or soliciting.\n 4. No spamming or flooding.\n 5. Follow moderator instructions.")
          if message.lower().lstrip().startswith(("-feedback", "!feedback")):
                     await self.highrise.send_whisper(user.id, "• [ Submit Feedback ]\\Thank you for joining our room! \n We value your feedback,")
-                    await self.highrise.send_whisper(user.id,"Please share your feedback/suggestions with @stonedzillia9 to improve our environment. Your contributions are valuable and will help us improve.")  
+                    await self.highrise.send_whisper(user.id,"Please share your feedback/suggestions with @lufian to improve our environment. Your contributions are valuable and will help us improve.")  
 
          if user.username.lower() in self.moderators:
             if message.lower().lstrip().startswith(("-mod","!mod")):
@@ -474,7 +474,7 @@ class Bot(BaseBot):
                       target_username = user_name
                       if target_username not in owners :
                           await self.teleport_user_next_to(target_username, user)
-                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("vip","-4","4","floor 4")) :
+                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("-v","v","vip","-4","4","floor 4")) :
                     if user.username.lower() in self.moderators :
                         await self.highrise.teleport(user_id, Position(15,20.1,3))
                 elif message.lower().startswith(('-tele')) and  message.lower().endswith(("-3","3","floor 3")) :
@@ -548,7 +548,7 @@ class Bot(BaseBot):
                await self.show_profile(user)
          if message.lower().startswith(("-top tippers","!top tippers")):
                await self.top_tippers()
-         if message.lower().startswith(('-4','-floor 4','-vip','vip')) : 
+         if message.lower().startswith(('-4','-floor 4','-vip','vip','-v')) : 
             if user.username.lower() in self.moderators or (user.username in self.membership and self.get_rank(self.membership[user.username]["amount"]) in ["VIP","Icon"]):
                await self.highrise.teleport(user.id, Position(15,20.1,3))
             else:
@@ -577,7 +577,7 @@ class Bot(BaseBot):
               task = asyncio.create_task(self.send_continuous_emote(emote_text,user_id,emote_time))
               self.continuous_emote_tasks[user.id] = task  
 
-         elif message.lower().startswith("stop"):
+         elif message.lower().startswith("-stop loop"):
             if user.id in self.continuous_emote_tasks and not self.continuous_emote_tasks[user.id].cancelled():
                 await self.stop_continuous_emote(user.id)
                 await self.highrise.chat("Continuous emote has been stopped.")
