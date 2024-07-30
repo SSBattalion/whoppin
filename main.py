@@ -392,21 +392,7 @@ class Bot(BaseBot):
               await self.highrise.send_whisper(user.id,"Only Admins are eligible to veiw.")  
              
          
-         if user.username.lower() in self.moderators:
-             if message.lower().lstrip().startswith(("!dancefloor on", "-dancefloor on")):
-                  if self.dance_floor_enabled:
-                     await self.highrise.chat("Emote floor is already enabled!")
-                  else:
-                    self.dance_floor_enabled = True
-                    asyncio.create_task(self.dance_floor())
-                    await self.highrise.chat("Emote floor is now enabled!")
-
-             if message.lower().lstrip().startswith(("!dancefloor off", "-dancefloor off")):
-                  if not self.dance_floor_enabled:
-                     await self.highrise.chat("Emote floor is already disabled!")
-                  else:
-                    self.dance_floor_enabled = False
-                    await self.highrise.chat("Emote floor is now disabled!")
+       
          if message.lower().lstrip().startswith(("-list", "!list")):
                 await self.highrise.chat("\\commands you can use:\n• !profile or -profile\n• -top tippers or !top tippers \n• !teleports or -teleports \n • !mod or -mod(Only mods)\n• !admin or -admin(Only admins) ")
 
