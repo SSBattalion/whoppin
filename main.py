@@ -878,7 +878,7 @@ class Bot(BaseBot):
         else:
             return None
     def get_amount_from_rank(self, rank: str) -> int:
-    """Returns the minimum amount required to achieve a certain rank."""
+  
       if rank == "Guest":
         return 0
       elif rank == "Repeater Guest":
