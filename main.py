@@ -780,13 +780,13 @@ class Bot(BaseBot):
     def get_title(self, username: str, amount: int) -> str:
       rank = self.get_rank(amount)
       if rank == "Guest":
-        return "Our Guest"
-      elif rank == "Repeater Guest":
-        return "Our Repeater Guest"
+        return "Guest"
+      elif rank == "Regular":
+        return "Repeater Guest"
       elif rank == "VIP":
-        return "Our VIP"
+        return "VIP"
       elif rank == "Icon":
-        return "The Icon"    
+        return "Icon"    
     async def top_tippers(self, limit: int = 10) -> None:
         top_tippers_list = []
         for username, info in self.membership.items():
@@ -861,6 +861,15 @@ class Bot(BaseBot):
             return ranks[current_index + 1]
         else:
             return None
+    def get_next_title_amount(self, amount: int) -> int:
+        if amount < 100:
+            return 100
+        elif amount < 500:
+            return 500
+        elif amount < 1000:
+            return 1000
+        else:
+            return 1500
     def get_amount_from_rank(self, rank: str) -> int:
   
       if rank == "Guest":
