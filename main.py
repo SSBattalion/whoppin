@@ -171,7 +171,7 @@ class Bot(BaseBot):
          Counter.bot_id = session_metadata.user_id
          print("Ali is booting ...") 
          asyncio.create_task(self.dance_floor())
-         self.highrise.tg.create_task(self.highrise.walk_to(Position(4.5, 0.25,1.5, facing='FrontRight')))
+         self.highrise.tg.create_task(self.highrise.walk_to(Position(13.5, 0.5,21.5, facing='FrontRight')))
          self.load_temporary_vips()
          self.load_moderators()
          self.load_membership()
@@ -544,11 +544,9 @@ class Bot(BaseBot):
          if message.lower().startswith(('-2','-floor 2')) :
                await self.highrise.teleport(user.id, Position(10.5,8.25,7.5)) 
          if message.startswith(('-floor 1','-g','-1')):
-             parts = message.split()
-             if len(parts) == 1:
-                await self.highrise.teleport(f"{user.id}", Position(10.5,0.5,7.5))
+               await self.highrise.teleport(f"{user.id}", Position(10.5,0.5,7.5))
            
-         if message.lower().startswith("loop"):
+         if message.lower().startswith("-loop"):
            parts = message.split()
            E = parts[1]
            E = int(E)
@@ -765,7 +763,7 @@ class Bot(BaseBot):
         elif message.lower() == "-stop following":
             self.following_username = None
    
-            await self.highrise.walk_to(Position(13.5, 1,11.5,"FrontRight"))
+            await self.highrise.walk_to(Position(13.5, 0.5,21.5,"FrontRight"))
 
   
   
