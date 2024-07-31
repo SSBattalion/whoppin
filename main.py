@@ -76,6 +76,7 @@ class Bot(BaseBot):
         self.emotesdf = Dance_Floor
         #conversation id var
         self.convo_id_registry = []
+        self.dance_floor_task = None
 
       
     def load_temporary_vips(self):
@@ -171,7 +172,7 @@ class Bot(BaseBot):
       try:
          Counter.bot_id = session_metadata.user_id
          print("Ali is booting ...") 
-         asyncio.create_task(self.dance_floor())
+         self.dance_floor_task = asyncio.create_task(self.dance_floor())
          self.highrise.tg.create_task(self.highrise.walk_to(Position(13.5, 0.5,21.5, facing='FrontRight')))
          self.load_temporary_vips()
          self.load_moderators()
@@ -258,14 +259,14 @@ class Bot(BaseBot):
                await self.highrise.chat (f"Announcement message cleared")
                self.stop_announce()
                return
-         if message.lower().startswith(("-turn on dance floor","-turn on df")) and user.username.lower() in self.moderators:
+         if message.lower().startswith(("-turn on dance floor","-turn on df")):
             if user.username.lower() in moderators:
                 if self.dance_floor_task is not None and self.dance_floor_task.done():
                     await self.highrise.chat("Emote floor is already turned on.")
                 else:
                     self.dance_floor_task = asyncio.create_task(self.dance_floor())
                     await self.highrise.chat("Emote floor turned on.")
-         if message.lower().startswith(("-turn off dance floor","-turn off df")) and user.username.lower() in self.moderators:
+         if message.lower().startswith(("-turn off dance floor","-turn off df")):
             if user.username.lower() in moderators:
                 if self.dance_floor_task is None or self.dance_floor_task.done():
                     await self.highrise.chat("Emote floor is already turned off.")
