@@ -19,12 +19,9 @@ from highrise.__main__ import *
 import asyncio, random
 from emotes import Emotes
 from emotes import Dance_Floor
-# main.py
-import os
 from data_manager import DataManager
 
-data_dir = '/app/data'
-data_manager = DataManager(data_dir)
+data_manager = DataManager()
 
 # Load data
 moderators = data_manager.load_moderators()
@@ -35,8 +32,6 @@ print(moderators)
 print(membership)
 
 # Save data
-data_manager.save_membership(membership)
-data_manager.save_moderators(moderators)
 data_manager.save_membership(membership)
 data_manager.save_moderators(moderators)
 owners = ['alionardo_','lufian','louivillie']
