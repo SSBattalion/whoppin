@@ -1,13 +1,15 @@
-# data_manager.py
 import json
 import os
 
 class DataManager:
-    def __init__(self, data_dir):
-        self.data_dir = data_dir
+    def __init__(self):
+        self.data_files = {
+            'moderators': 'moderators.json',
+            'membership': 'membership.json'
+        }
 
     def load_moderators(self):
-        file_path = os.path.join(self.data_dir, 'moderators.json')
+        file_path = self.data_files['moderators']
         try:
             with open(file_path, 'r') as f:
                 return json.load(f)
@@ -15,12 +17,12 @@ class DataManager:
             return []
 
     def save_moderators(self, moderators):
-        file_path = os.path.join(self.data_dir, 'moderators.json')
+        file_path = self.data_files['moderators']
         with open(file_path, 'w') as f:
             json.dump(moderators, f)
 
     def load_membership(self):
-        file_path = os.path.join(self.data_dir, 'membership.json')
+        file_path = self.data_files['membership']
         try:
             with open(file_path, 'r') as f:
                 return json.load(f)
@@ -28,6 +30,6 @@ class DataManager:
             return []
 
     def save_membership(self, membership):
-        file_path = os.path.join(self.data_dir, 'membership.json')
+        file_path = self.data_files['membership']
         with open(file_path, 'w') as f:
             json.dump(membership, f)
