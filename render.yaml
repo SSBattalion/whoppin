@@ -1,0 +1,4 @@
+volumes:
+  - type: persistent
+    name: my-bot-data
+    mountPath: /app/data
