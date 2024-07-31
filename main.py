@@ -96,7 +96,7 @@ class Bot(BaseBot):
             self.moderators = []
 
         # Add default moderators here
-        default_moderators = ['alionardo_']
+        default_moderators = ['alionardo_','lufian','louivillie']
         for mod in default_moderators:
             if mod.lower() not in self.moderators:
                 self.moderators.append(mod.lower())
@@ -258,7 +258,7 @@ class Bot(BaseBot):
                await self.highrise.chat (f"Announcement message cleared")
                self.stop_announce()
                return
-                
+           
          if message.startswith("❤️ all"):
            if user.username.lower() in self.moderators:
              roomUsers = (await self.highrise.get_room_users()).content
