@@ -259,20 +259,20 @@ class Bot(BaseBot):
                await self.highrise.chat (f"Announcement message cleared")
                self.stop_announce()
                return
-         if message.lower().startswith(("-turn on dance floor","-turn on df")):
-            if user.username.lower() in moderators:
-                if self.dance_floor_task is not None and self.dance_floor_task.done():
-                    await self.highrise.chat("Emote floor is already turned on.")
-                else:
-                    self.dance_floor_task = asyncio.create_task(self.dance_floor())
-                    await self.highrise.chat("Emote floor turned on.")
-         if message.lower().startswith(("-turn off dance floor","-turn off df")):
-            if user.username.lower() in moderators:
-                if self.dance_floor_task is None or self.dance_floor_task.done():
-                    await self.highrise.chat("Emote floor is already turned off.")
-                else:
-                    self.dance_floor_task.cancel()
-                    await self.highrise.chat("Emote floor turned off.")   
+         if message.lower().startswith("-turn on emote floor") :
+                if user.username.lower() in moderators:
+                    if self.dance_floor_task is not None and not self.dance_floor_task.done():
+                        await self.highrise.chat("Emote floor is already turned on.")
+                    else:
+                        self.dance_floor_task = asyncio.create_task(self.dance_floor())
+                        await self.highrise.chat("Emote floor turned on.")
+         if message.lower().startswith("-turn off emote floor") :
+                if user.username.lower() in moderators:
+                    if self.dance_floor_task is None or self.dance_floor_task.done():
+                        await self.highrise.chat("Emote floor is already turned off.")
+                    else:
+                        self.dance_floor_task.cancel()
+                        await self.highrise.chat("Emote floor turned off.")
          if message.startswith("❤️ all"):
            if user.username.lower() in self.moderators:
              roomUsers = (await self.highrise.get_room_users()).content
