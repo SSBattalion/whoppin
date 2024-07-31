@@ -76,9 +76,6 @@ class Bot(BaseBot):
         self.announce_task = None
         #conversation id var
         self.convo_id_registry = []
-        self.data_dir = data_dir
-        self.moderators_file = os.path.join(data_dir, 'oderators.json')
-        self.membership_file = os.path.join(data_dir, 'embership.json')
         #dance floor position
         min_x = 6.5
         max_x = 8.5
