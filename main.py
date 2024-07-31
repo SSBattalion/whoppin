@@ -19,6 +19,24 @@ from highrise.__main__ import *
 import asyncio, random
 from emotes import Emotes
 from emotes import Dance_Floor
+import os
+from data_manager import DataManager
+
+data_dir = '/app/data'
+
+data_manager = DataManager(data_dir)
+
+# Load data
+moderators = data_manager.load_moderators()
+membership = data_manager.load_membership()
+
+# Use the data...
+print(moderators)
+print(membership)
+
+# Save data
+data_manager.save_membership(membership)
+data_manager.save_moderators(moderators)
 owners = ['alionardo_','lufian','louivillie']
 moderators = ['alionardo_','lufian','louivillie']
 
@@ -58,6 +76,9 @@ class Bot(BaseBot):
         self.announce_task = None
         #conversation id var
         self.convo_id_registry = []
+        self.data_dir = data_dir
+        self.moderators_file = os.path.join(data_dir, 'oderators.json')
+        self.membership_file = os.path.join(data_dir, 'embership.json')
         #dance floor position
         min_x = 6.5
         max_x = 8.5
@@ -538,7 +559,7 @@ class Bot(BaseBot):
             if user.username.lower() in self.moderators or (user.username in self.membership and self.get_rank(self.membership[user.username]["amount"]) in ["VIP","Icon"]):
                await self.highrise.teleport(user.id, Position(15,20.1,3))
             else:
-               await self.highrise.send_whisper((user.id)," this is a privet place for MODs and VIPs")
+               await self.highrise.send_whisper((user.id)," this is a private place for MODs and VIPs")
          if message.lower().startswith(('-3','-floor 3')) : 
                await self.highrise.teleport(user.id, Position(11.5,15,6.5)) 
          if message.lower().startswith(('-2','-floor 2')) :
