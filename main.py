@@ -875,7 +875,7 @@ class Bot(BaseBot):
   
       if rank == "Guest":
         return 0
-      elif rank == "Repeater Guest":
+      elif rank == "Regular":
         return 100
       elif rank == "VIP":
         return 500
