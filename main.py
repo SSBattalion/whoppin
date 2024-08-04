@@ -626,7 +626,7 @@ class Bot(BaseBot):
         active_palette=-1),
         Item(type='clothing', 
         amount=1, 
-        id='watch-n_room32019blackwatch', 
+        id='watch-n_room12019watch', 
         account_bound=False,
         active_palette=-1),
         Item(type='clothing', 
