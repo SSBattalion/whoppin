@@ -643,7 +643,7 @@ class Bot(BaseBot):
         amount=1,
         id='mouth-basic2018yummouth',
         account_bound=False,
-        active_palette=3),
+        active_palette=2),
         Item(type='clothing', amount=1, id='glasses-n_10', active_palette=1),
         Item(type='clothing', amount=1, id='hair_front-n_malenew04', account_bound=False, active_palette=6),
         Item(type='clothing', amount=1, id='hair_back-n_malenew04', account_bound=False, active_palette=6),
