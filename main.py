@@ -645,8 +645,8 @@ class Bot(BaseBot):
         account_bound=False,
         active_palette=3),
         Item(type='clothing', amount=1, id='glasses-n_10', active_palette=1),
-        Item(type='clothing', amount=1, id='hair_front-n_malenew04', account_bound=False, active_palette=7),
-        Item(type='clothing', amount=1, id='hair_back-n_malenew04', account_bound=False, active_palette=7),
+        Item(type='clothing', amount=1, id='hair_front-n_malenew04', account_bound=False, active_palette=6),
+        Item(type='clothing', amount=1, id='hair_back-n_malenew04', account_bound=False, active_palette=6),
         Item(type='clothing', 
         amount=1, 
         id='eye-n_basic2018nudesquare',
@@ -656,7 +656,7 @@ class Bot(BaseBot):
         amount=1,
         id='eyebrow-n_basic2018newbrows16', 
         account_bound=False,
-        active_palette=7)
+        active_palette=6)
 
         ]) 
 
