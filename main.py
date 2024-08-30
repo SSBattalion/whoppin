@@ -480,7 +480,7 @@ class Bot(BaseBot):
 
                 elif message.lower().startswith(('-tele')) and  message.lower().endswith(("g","1","floor 1","-g","-1")) :
                     if user.username.lower() in self.moderators :
-                        await self.highrise.teleport(user_id, Position(14,6.7,,15))  
+                        await self.highrise.teleport(user_id, Position(14,6.7,15))  
                 elif message.lower().startswith(('-tele')) and  message.lower().endswith(("dj"."-dj")) :
                     if user.username.lower() in self.moderators :
                         await self.highrise.teleport(user_id, Position(15,14.25,2.5))  
@@ -555,7 +555,7 @@ class Bot(BaseBot):
             if user.username.lower() in self.moderators:
                await self.highrise.teleport(user.id, Position(15,14.25,2.5)) 
          if message.startswith(('-floor 1','-g','-1')):
-               await self.highrise.teleport(f"{user.id}", Position(14,6.7,,15))
+               await self.highrise.teleport(f"{user.id}", Position(14,6.7,15))
            
          if message.lower().startswith("-loop"):
            parts = message.split()
