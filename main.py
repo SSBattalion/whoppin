@@ -481,7 +481,7 @@ class Bot(BaseBot):
                 elif message.lower().startswith(('-tele')) and  message.lower().endswith(("g","1","floor 1","-g","-1")) :
                     if user.username.lower() in self.moderators :
                         await self.highrise.teleport(user_id, Position(14,6.7,15))  
-                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("dj"."-dj")) :
+                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("dj","-dj")) :
                     if user.username.lower() in self.moderators :
                         await self.highrise.teleport(user_id, Position(15,14.25,2.5))  
             except Exception as e:
