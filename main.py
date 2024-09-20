@@ -21,7 +21,7 @@ from emotes import Emotes
 from emotes import Dance_Floor
 
 owners = ['alionardo_']
-moderators = ['alionardo_']
+moderators = ['alionardo_','dirty2x']
 
 
 class BotDefinition:
@@ -105,7 +105,7 @@ class Bot(BaseBot):
             self.moderators = []
 
         # Add default moderators here
-        default_moderators = ['alionardo_']
+        default_moderators = ['alionardo_','dirty2x']
         for mod in default_moderators:
             if mod.lower() not in self.moderators:
                 self.moderators.append(mod.lower())
