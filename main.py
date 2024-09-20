@@ -432,7 +432,7 @@ class Bot(BaseBot):
                     if user_name in self.membership:
                        self.membership.remove(user_name)
                        self.save_membership()
-                       await self.highrise.chat(f"{user_name} is no longer a moderator.")
+                       await self.highrise.chat(f"{user_name} is no longer a VIP.")
                 elif message.lower().startswith("-here"):
                    if user.username.lower() in self.moderators:
                       target_username = user_name
@@ -441,7 +441,7 @@ class Bot(BaseBot):
             except Exception as e:
              print(f"An exception occurred[Due To {parts[0][1:]}]: {e}")
 
-         if message.lower().startswith(('-floor1','-g','-1','f1')):
+         if message.lower().startswith(('-floor1','-1','f1')):
                 await self.highrise.teleport(f"{user.id}", Position(14,0.25,5.5))
          if message.lower().startswith(('-floor2','-2','f2')):
                 await self.highrise.teleport(f"{user.id}", Position(14.5,6.5,7.5))
