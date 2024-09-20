@@ -448,7 +448,7 @@ class Bot(BaseBot):
          if message.lower().startswith(('-floor3','-3','f3')):
                 await self.highrise.teleport(f"{user.id}", Position(15.5,12.5,8.5))
          if message.lower().startswith(('-v','-vip')):
-             if user.username.lower() in self.membership :
+             if user.username.lower() in self.membership or user.username.lower() in self.moderators:
                 await self.highrise.teleport(f"{user.id}", Position(14.5,17.75,3.5))
              else:
               await self.highrise.send_whisper(user.id,"Only VIP are able use this teleport ,you can ask for mod to assist you get ur vip.")  
