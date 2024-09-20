@@ -193,7 +193,19 @@ class Bot(BaseBot):
           
       except Exception as e:
             print(f"An error on user_on_join: {e}")
+    async def teleport_to(self, requester_user: User, target_username: str):
+         room_users = await self.highrise.get_room_users()
+         target_position = None
     
+         for user, position in room_users.content:
+            if user.username.lower() == target_username.lower(): 
+                target_position = position
+                break
+    
+         if target_position:
+            new_position = Position(target_position.x, target_position.y, target_position.z, target_position.facing)
+            await self.highrise.teleport(requester_user.id, new_position)
+
     async def teleport_user_next_to(self, target_username: str, requester_user: User):
       room_users = await self.highrise.get_room_users()
       requester_position = None
@@ -379,7 +391,7 @@ class Bot(BaseBot):
                await self.highrise.send_whisper(user.id,"\n  \n•Moderating :\n ____________________________\n -kick @ \n -ban @ \n -mute @ \n -unmute @\n -turn on/off emote floor ")
 
              
-         if message.lstrip().startswith(("-give","-remove")):
+         if message.lstrip().startswith(("-give","-remove","-here","-to")):
             response = await self.highrise.get_room_users()
             users = [content[0] for content in response.content]
             usernames = [user.username.lower() for user in users]
@@ -438,6 +450,10 @@ class Bot(BaseBot):
                       target_username = user_name
                       if target_username not in owners :
                           await self.teleport_user_next_to(target_username, user)
+                elif message.lower().startswith("-to"):
+                  if user.username.lower() in self.moderators:
+                        target_username = user_name
+                        await self.teleport_to(user, target_username)
             except Exception as e:
              print(f"An exception occurred[Due To {parts[0][1:]}]: {e}")
 
