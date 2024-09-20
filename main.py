@@ -20,8 +20,8 @@ import asyncio, random
 from emotes import Emotes
 from emotes import Dance_Floor
 
-owners = ['alionardo_','lianis_r','bloodyasap','nikka_24']
-moderators = ['alionardo_','lianis_r','bloodyasap','nikka_24']
+owners = ['alionardo_']
+moderators = ['alionardo_']
 
 
 class BotDefinition:
@@ -48,7 +48,6 @@ class Bot(BaseBot):
 
     def __init__(self):
         super().__init__()
-        self.load_membership()
         self.load_moderators()
         self.load_temporary_vips()
         self.following_username = None
@@ -97,22 +96,12 @@ class Bot(BaseBot):
             self.moderators = []
 
         # Add default moderators here
-        default_moderators = ['alionardo_','lianis_r','bloodyasap','nikka_24']
+        default_moderators = ['alionardo_']
         for mod in default_moderators:
             if mod.lower() not in self.moderators:
                 self.moderators.append(mod.lower())
        
-    def load_membership(self):
-     try:
-        with open("membership.json", "r") as file:
-            self.membership = json.load(file)
-     except FileNotFoundError:
-        self.membership = []
-    def save_membership(self):
-     with open("membership.json", "w") as file:
-        json.dump(self.membership, file)
 
-  
     def save_moderators(self):
 
       with open("moderators.json", "w") as file:
@@ -176,7 +165,6 @@ class Bot(BaseBot):
          self.highrise.tg.create_task(self.highrise.walk_to(Position(16.5, 6.5,22, facing='FrontLeft')))
          self.load_temporary_vips()
          self.load_moderators()
-         self.load_membership()
          await asyncio.sleep(15)
          await self.highrise.chat(f"Deployed")
          if Counter.bot_id not in self.dancer:
@@ -191,21 +179,7 @@ class Bot(BaseBot):
     async def on_user_join(self, user: User, position: Position | AnchorPosition) -> None:
 
       try:
-            title = ""
-            if user.username in self.membership:
-                title = self.get_title(user.username, self.membership[user.username]["amount"])
-                await self.highrise.send_whisper(user.id, f"\nThe {title} {user.username} in the house!\n Welcome to Ur Fav Hangout Spot \n• !list or -list :To discover our room.")
-                await self.highrise.send_emote('emote-salute')
-            elif user.username in moderators:
-                 title = "Owners member"
-                 await self.highrise.send_whisper(user.id, f"\nThe {title} :{user.username} in the house!")
-                 await self.highrise.send_emote('emote-salute')
-            elif user.username in self.moderators:
-                 title = "MOd member"
-                 await self.highrise.send_whisper(user.id, f"\nThe {title} :{user.username} in the house!")
-                 await self.highrise.send_emote('emote-salute')
-            else :
-                await self.highrise.send_whisper(user.id, f"\nHello {user.username},\nWelcome to ✨ Euphoria ✨\n• !list or -list :To discover our room.")
+         await self.highrise.send_whisper(user.id, f"\nHello {user.username},\nWelcome to <#FFB6C1>FIND UR BADDIE<#FFFFF>\n• !list or -list :To discover our room.")
           
       except Exception as e:
             print(f"An error on user_on_join: {e}")
@@ -371,33 +345,10 @@ class Bot(BaseBot):
 
         
         
-         if message == "-tip 5":
-              if user.username.lower() in self.moderators:
-                roomUsers = (await self.highrise.get_room_users()).content
-                for roomUser, _ in roomUsers:
-                  await self.highrise.tip_user(roomUser.id, "gold_bar_5")
-              else: 
-                await  self.highrise.send_whisper(user.id, f"Only Admins and mods can use tip!")
 
-         if message == "-tip 1":
-              if user.username.lower() in self.moderators:
-                roomUsers = (await self.highrise.get_room_users()).content
-                for roomUser, _ in roomUsers:
-                  await self.highrise.tip_user(roomUser.id, "gold_bar_1")
-              else: 
-                await  self.highrise.send_whisper(user.id, f"Only Admins and mods are eligible to tip.")
-         if message == "-tip 10":
-              if user.username.lower() in self.moderators:
-                roomUsers = (await self.highrise.get_room_users()).content
-                for roomUser, _ in roomUsers:
-                  await self.highrise.tip_user(roomUser.id, "gold_bar_10")
-              else: 
-                await  self.highrise.send_whisper(user.id, f"Only Admins and mods are eligible to tip.")
          if message.lower().lstrip().startswith(("-emotes", "!emotes")):
                 await self.highrise.send_whisper(user.id, "\n• Emote can be used by NUMBERS")
                 await self.highrise.send_whisper(user.id, "\n• For loops type -loop before the emote number.\n-stop loop : to stop")         
-         if message.lower().lstrip().startswith(("!loop","-loop")):
-          await self.highrise.send_whisper(user.id,"\n• loops\n ____________________________\nMention -loop before the emote numer\n ____________________________")
          if message.lower().lstrip().startswith(("!admin","-admin")):
            if user.username.lower() in moderators :
              await self.highrise.send_whisper(user.id,"\n____________________________\n• Give mod & vip :\n-give @ mod \n-give @ mod 24h\n-upgrade @ \n• Remove mod\vop\n-remove @ mod\vip\n• Advertising\n-announce + text\n-clear\n ____________________________")
@@ -413,8 +364,6 @@ class Bot(BaseBot):
     
          if message == "-teleports" or message =="!teleports" :
                     await self.highrise.chat(f"\n • Teleports\n ____________________________\n-g or -floor 1: Ground floor \n-dj :(mods & DJ) \n-vip or -v : (vip rank or above)")
-         if message.lower().lstrip().startswith(("!rules", "-rules")):
-                    await self.highrise.chat(f"\n\n        COMMUNITY GUIDELINES\n ____________________________\n 1. Respect all members.\n 2. Keep it family-friendly.\n 3. No begging or soliciting.\n 4. No spamming or flooding.\n 5. Follow moderator instructions.")
          if message.lower().lstrip().startswith(("-feedback", "!feedback")):
                     await self.highrise.send_whisper(user.id, "• [ Submit Feedback ]\\Thank you for joining our room! \n We value your feedback,")
                     await self.highrise.send_whisper(user.id,"Please share your feedback/suggestions with @lufian to improve our environment. Your contributions are valuable and will help us improve.")  
@@ -474,60 +423,10 @@ class Bot(BaseBot):
                       target_username = user_name
                       if target_username not in owners :
                           await self.teleport_user_next_to(target_username, user)
-                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("-v","v","vip")) :
-                    if user.username.lower() in self.moderators :
-                        await self.highrise.teleport(user_id, Position(9.5,13.75,1.5))
-
-                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("g","1","floor 1","-g","-1")) :
-                    if user.username.lower() in self.moderators :
-                        await self.highrise.teleport(user_id, Position(14,6.7,15))  
-                elif message.lower().startswith(('-tele')) and  message.lower().endswith(("dj","-dj")) :
-                    if user.username.lower() in self.moderators :
-                        await self.highrise.teleport(user_id, Position(15,14.25,2.5))  
             except Exception as e:
              print(f"An exception occurred[Due To {parts[0][1:]}]: {e}")
 
-         if message.lstrip().startswith(("-upgrade")):
-            response = await self.highrise.get_room_users()
-            users = [content[0] for content in response.content]
-            usernames = [user.username.lower() for user in users]
-            parts = message[1:].split()
-            args = parts[1:]
-
-            if len(args) < 1:
-                await self.highrise.send_whisper(user.id, f"Usage!{parts[0]} <@Alionardo_>")
-                return
-            elif args[0][0]!= "@":
-                await self.highrise.send_whisper(user.id, "Invalid user format. Please use '@username'.")
-                return
-            elif args[0][1:].lower() not in usernames:
-                await self.highrise.send_whisper(user.id, f"{args[0][1:]} is not in the room.")
-                return
-
-            user_id = next((u.id for u in users if u.username.lower() == args[0][1:].lower()), None)
-            user_name = next((u.username.lower() for u in users if u.username.lower() == args[0][1:].lower()), None)
-            user_upg = next((u.username for u in users if u.username.lower() == args[0][1:].lower()), None)
-            if not user_id:
-                await self.highrise.send_whisper(user.id, f"User {args[0][1:]} not found")
-                return    
-            try:    
-               if message.lower().startswith(('-upgrade')):
-                   if user.username.lower() in moderators :
-                        if user_upg in self.membership:
-                           current_rank = self.membership[user_upg]["rank"]
-                           next_rank = self.get_next_rank(current_rank)
-                           if next_rank:
-                               self.membership[user_upg]["rank"] = next_rank
-                               new_title = self.get_title(user_upg, self.get_amount_from_rank(next_rank))
-                               self.membership[user_upg]["amount"] = self.get_amount_from_rank(next_rank)
-                               self.save_membership()
-                               await self.highrise.chat(f"Congratulations, {user_upg}! You've been upgraded to {new_title} for free!")
-                           else:
-                               await self.highrise.chat("You are already at the highest rank!")
-                        else:
-                               await self.highrise.chat(f"{user_upg} in the rank list should at least try tip a nugget to get a rank.")
-            except Exception as e:
-                print(f"An exception occurred[Due To {parts[0][1:]}]: {e}")
+ 
          if message.startswith("!time"):
             parts = message.split()
             if len(parts) == 2:
@@ -542,20 +441,7 @@ class Bot(BaseBot):
             else:
                 await self.highrise.send_whisper(user.id, "Usage: !time @username")
 
-         if message.lower().startswith(("-profile","!profile")):
-               await self.show_profile(user)
-         if message.lower().startswith(("-top tippers","!top tippers")):
-               await self.top_tippers()
-         if message.lower().startswith(('-vip','-v')) : 
-            if user.username.lower() in self.moderators or (user.username in self.membership and self.get_rank(self.membership[user.username]["amount"]) in ["Regular","VIP","Icon"]):
-               await self.highrise.teleport(user.id, Position(9.5,13.75,1.5))
-            else:
-               await self.highrise.send_whisper((user.id)," this is a private place for MODs and VIPs")
-         if message.lower().startswith(('-dj')) :
-            if user.username.lower() in self.moderators:
-               await self.highrise.teleport(user.id, Position(15,14.25,2.5)) 
-         if message.startswith(('-floor 1','-g','-1')):
-               await self.highrise.teleport(f"{user.id}", Position(14,6.7,15))
+    
            
          if message.lower().startswith("-loop"):
            parts = message.split()
@@ -774,121 +660,15 @@ class Bot(BaseBot):
 
   
   
-    def get_rank(self, amount: int) -> str:
-       """Returns the rank based on the amount."""
-       if amount < 100:
-        return "Guest"
-       elif 100 <= amount < 500:
-        return "Repeater Guest"
-       elif 500 <= amount < 1000:
-        return "VIP"
-       else:
-        return "Icon"
-    def get_title(self, username: str, amount: int) -> str:
-      rank = self.get_rank(amount)
-      if rank == "Guest":
-        return "Guest"
-      elif rank == "Regular":
-        return "Repeater Guest"
-      elif rank == "VIP":
-        return "VIP"
-      elif rank == "Icon":
-        return "Icon"    
-    async def top_tippers(self, limit: int = 10) -> None:
-        top_tippers_list = []
-        for username, info in self.membership.items():
-            title = self.get_title(username, info["amount"])
-            top_tippers_list.append((info["amount"], title, username))
-        top_tippers_list.sort(reverse=True)
-        top_tippers_list = top_tippers_list[:limit]
-        message = "\nTop Tippers:\n"
-        for i, (amount, title, username) in enumerate(top_tippers_list, start=1):
-            medal = ""
-            if i == 1:
-                medal = "🥇"
-            elif i == 2:
-                medal = "🥈"
-            elif i == 3:
-                medal = "🥉"
-            message += f"{i}. {medal} {title} : {username} - {amount} 🪙\n"
-        await self.highrise.chat(message)
-    async def show_profile(self, user: User) -> None:
-        username = user.username
-        if username in self.membership:
-            amount = self.membership[username]["amount"]
-            current_title = self.get_title(username, amount)
-            next_title_amount = self.get_next_title_amount(amount)
-            next_title = self.get_rank(next_title_amount)
-            progress = int((amount / next_title_amount) * 10)
-            thread = f"\n•{username}'s Profile :\n"
-            thread += f"•Total Gold Spent: {amount} gold\n"
-            thread += f"•Current Title: {current_title}\n"
-            thread += f"•Progress to {next_title}: "
-            for _ in range(progress):
-                thread += "█"  # filled block
-            for _ in range(10 - progress):
-                thread += "░"  # shaded block
-            thread += f"\n**Next Title:** {next_title} ({next_title_amount} gold)"
-            await self.highrise.chat(thread)
-        else:
-            await self.highrise.send_whisper(user.id, "You don't have a profile yet. Start tipping gold to earn titles!")
-
     
            
     async def on_tip(self, sender: User, receiver: User, tip: CurrencyItem) -> None:
         try:
             print(f"{sender.username} tipped {receiver.username} an amount of {tip.amount}")
-            if receiver.id == Counter.bot_id:
-                if sender.username not in self.membership:
-                    self.membership[sender.username] = {"amount": tip.amount, "rank": self.get_rank(tip.amount)}
-                    title = self.get_title(sender.username, tip.amount)
-                    self.membership[sender.username]["amount"] += 0
-                    await self.highrise.chat(f"\n{title} : {sender.username} has tipped {tip.amount} g! Thank you for your generosity!")
-                    self.save_membership()
-                else:
-                    previous_amount = self.membership[sender.username]["amount"]
-                    previous_title = self.get_title(sender.username, previous_amount)
-                    self.membership[sender.username]["amount"] += tip.amount
-                    self.membership[sender.username]["rank"] = self.get_rank(self.membership[sender.username]["amount"])
-                    title = self.get_title(sender.username, self.membership[sender.username]["amount"])
-                    # Sort players by tip amount in descending order
-                    self.membership = dict(sorted(self.membership.items(), key=lambda item: item[1]["amount"], reverse=True))
-                    self.save_membership()
-                    await self.highrise.chat(f"\n{title}: {sender.username} has tipped {tip.amount} g! Thank you for your generosity!")
-                    new_amount = self.membership[sender.username]["amount"]
-                    new_title = self.get_title(sender.username, new_amount)
-                    if new_title!= previous_title:
-                        await self.highrise.send_whisper(sender.id, f"Congratulations, {sender.username}! You've upgraded to {new_title} with a total of {new_amount}g!")
+  
         except Exception as e:
             print(f"Error: {e}")
-    def get_next_rank(self, current_rank: str) -> str:
-        ranks = ["Guest", "Regular", "VIP", "Icon"]
-        current_index = ranks.index(current_rank)
-        if current_index < len(ranks) - 1:
-            return ranks[current_index + 1]
-        else:
-            return None
-    def get_next_title_amount(self, amount: int) -> int:
-        if amount < 100:
-            return 100
-        elif amount < 500:
-            return 500
-        elif amount < 1000:
-            return 1000
-        else:
-            return 1500
-    def get_amount_from_rank(self, rank: str) -> int:
   
-      if rank == "Guest":
-        return 0
-      elif rank == "Regular":
-        return 100
-      elif rank == "VIP":
-        return 500
-      elif rank == "Icon":
-        return 1000
-      else:
-        return 0  # or some other default value
     async def on_user_move(self, user: User, pos: Position | AnchorPosition) -> None:
       if user.username == " Alionardo_":
          print(f"{user.username}: {pos}")
