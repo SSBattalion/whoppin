@@ -21,7 +21,7 @@ from emotes import Emotes
 from emotes import Dance_Floor
 
 owners = ['alionardo_']
-moderators = ['alionardo_','dirty2x']
+moderators = ['alionardo_','xxnormixx']
 
 
 class BotDefinition:
@@ -60,12 +60,12 @@ class Bot(BaseBot):
         #conversation id var
         self.convo_id_registry = []
         #dance floor position
-        min_x = 6.5
-        max_x = 11
+        min_x = 2.5
+        max_x = 6.5
         min_y = 0
         max_y = 1
-        min_z = 9.5
-        max_z = 13.5
+        min_z = 13.5
+        max_z = 17.5
 
         self.dance_floor_pos = [(min_x, max_x, min_y, max_y, min_z, max_z)]
 
@@ -102,10 +102,10 @@ class Bot(BaseBot):
             with open("moderators.json", "r") as file:
                 self.moderators = json.load(file)
         except FileNotFoundError:
-            self.moderators = []
+            self.moderators = ['alionardo_','xxnormixx']
 
         # Add default moderators here
-        default_moderators = ['alionardo_','dirty2x']
+        default_moderators = ['alionardo_','xxnormixx']
         for mod in default_moderators:
             if mod.lower() not in self.moderators:
                 self.moderators.append(mod.lower())
@@ -171,7 +171,7 @@ class Bot(BaseBot):
          Counter.bot_id = session_metadata.user_id
          print("Ali is booting ...") 
          self.dance_floor_task = asyncio.create_task(self.dance_floor())
-         self.highrise.tg.create_task(self.highrise.walk_to(Position(17,0.2599945068359375,16.5, facing='FrontRight')))
+         self.highrise.tg.create_task(self.highrise.walk_to(Position(18.5,6.25,2, facing='FrontRight')))
          self.load_temporary_vips()
          self.load_moderators()
          self.load_membership()
@@ -189,7 +189,7 @@ class Bot(BaseBot):
     async def on_user_join(self, user: User, position: Position | AnchorPosition) -> None:
 
       try:
-         await self.highrise.send_whisper(user.id, f"\nHello {user.username},\nWelcome to <#FFB6C1>FIND UR BADDIE\n• !list or -list :To discover our room.")
+         await self.highrise.send_whisper(user.id, f"\nHello {user.username},\nWelcome to <#39FF14>FIND YOUR SOUL TIE🍃\n• !list or -list :To discover our room.")
           
       except Exception as e:
             print(f"An error on user_on_join: {e}")
@@ -387,7 +387,7 @@ class Bot(BaseBot):
                     await self.highrise.chat(f"\n • Teleports\n ____________________________\n-f1 or -floor 1: Ground floor \n-f2 or -floor2 : Second floor \n-f3 or floor3 : Third floor \n-vip or -v : (vip)")
         
          if user.username.lower() in self.moderators:
-            if message.lower().lstrip().startswith(("-mod","!mod")):
+            if message.lower().lstrip().startswith(("!mod")):
                await self.highrise.send_whisper(user.id,"\n  \n•Moderating :\n ____________________________\n -kick @ \n -ban @ \n -mute @ \n -unmute @\n -turn on/off emote floor ")
 
              
@@ -458,19 +458,19 @@ class Bot(BaseBot):
              print(f"An exception occurred[Due To {parts[0][1:]}]: {e}")
 
          if message.lower().startswith(('-floor1','-1','f1')):
-                await self.highrise.teleport(f"{user.id}", Position(14,0.25,5.5))
+                await self.highrise.teleport(f"{user.id}", Position(17.5,0.25,4.5))
          if message.lower().startswith(('-floor2','-2','f2')):
-                await self.highrise.teleport(f"{user.id}", Position(14.5,6.5,7.5))
+                await self.highrise.teleport(f"{user.id}", Position(17.5,6.25,7))
          if message.lower().startswith(('-floor3','-3','f3')):
-                await self.highrise.teleport(f"{user.id}", Position(15.5,12.5,8.5))
+                await self.highrise.teleport(f"{user.id}", Position(18.5,12.25,2.5))
          if message.lower().startswith(('-v','-vip')):
              if user.username.lower() in self.membership or user.username.lower() in self.moderators:
-                await self.highrise.teleport(f"{user.id}", Position(14.5,17.75,3.5))
+                await self.highrise.teleport(f"{user.id}", Position(18.5,17.5,7.5))
              else:
               await self.highrise.send_whisper(user.id,"Only VIP are able use this teleport ,you can ask for mod to assist you get ur vip.")  
-         if message.lower().startswith(('#mod')):
+         if message.lower().startswith(('-mod')):
              if user.username.lower() in self.moderators :
-                await self.highrise.teleport(f"{user.id}", Position(7.5,17.75,2.5))
+                await self.highrise.teleport(f"{user.id}", Position(19.5,17.25,2.5))
              else:
               await self.highrise.send_whisper(user.id,"Only mods/Admins can use this teleport.")  
          if message.startswith("!time"):
@@ -702,7 +702,7 @@ class Bot(BaseBot):
         elif message.lower() == "-stop following":
             self.following_username = None
    
-            await self.highrise.walk_to(Position(17,0.2599945068359375,16.5, facing='FrontRight'))
+            await self.highrise.walk_to(Position(18.5,6.25,2, facing='FrontRight'))
 
   
   
