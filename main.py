@@ -713,7 +713,7 @@ class Bot(BaseBot):
                             "• -kick @user : Kick user\n" +
                             "• -ban @user : Ban user\n" +
                             "• -mute/unmute @user : Mute controls\n" +
-                            "• -promote/demote @user mod/vip : Permissions"+
+                            "• -give/remove @user vip : Permissions\n"+
                             "• -here @user/-to @user : Teleport controls\n" +
                             "• -tele @user x y z : Custom teleport \n")
                         await asyncio.sleep(0.5)
@@ -735,15 +735,14 @@ class Bot(BaseBot):
                             return
                         await self.highrise.chat("👑 VIP Commands:\n" +
                             "• -vip/-v : Teleport to VIP area\n" +
-                            "• -time @user : Check VIP duration\n" +
                             "• Special room access and features")
                     elif category == "owners":
                         if user.username.lower() not in self.owners:
                             await self.highrise.chat("❌ You need owner permissions to view these commands.")
                             return
                         await self.highrise.chat("👑 Owner Commands:\n" +
-                            "• -promote/@user mod/vip : Promote users to roles\n" +
-                            "• -demote/@user mod/vip : Demote users from roles\n" +
+                            "• -promote/@user mod/designer : Promote users to roles\n" +
+                            "• -demote/@user mod/designer : Demote users from roles\n" +
                             "• -tip @user amount : Tip a user\n" +
                             "• -tipall amount : Tip all users\n" +
                             "• Full control over room settings and moderation")
@@ -783,7 +782,7 @@ class Bot(BaseBot):
             try:
 
 
-                if message.lower().startswith("-promote") and message.lower().endswith("vip"):   
+                if message.lower().startswith("-give") and message.lower().endswith("vip"):   
                   try:
                       privileges = await self.highrise.get_room_privilege(user.id)
                       if privileges and privileges.moderator:
@@ -797,7 +796,7 @@ class Bot(BaseBot):
                       print(f"Error checking privileges: {e}")
                       await self.highrise.send_whisper(user.id, "Error checking permissions.")
 
-                elif message.lower().startswith("-demote") and message.lower().endswith("vip"):
+                elif message.lower().startswith("-remove") and message.lower().endswith("vip"):
                   try:
                       privileges = await self.highrise.get_room_privilege(user.id)
                       if privileges and privileges.moderator:
