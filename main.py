@@ -670,31 +670,33 @@ class Bot(BaseBot):
 
                     elif category == "emotes":
                         await self.highrise.chat("🎭 Emote Commands Part 1 [1-20]:\n" +
-                            "1:sitfloor 2:enthusiastic 3:yes 4:wave 5:tired\n" +
-                            "6:snowball 7:snowangel 8:shy 9:sad 10:no\n" +
-                            "11:model 12:lust 13:laugh 14:kiss 15:hot\n" +
-                            "16:hello 17-18:greedy 19:curtsy 20:confused")
-
+                            "1:ignition 2:fairytwirl 3:fairyfloat 4:launch 5:cutesalute\n" +
+                            "6:atattention 7:tiktok 8:smooch 9:pushit 10:foryou\n" +
+                            "11:touch 12:kawaii 13:repose 14:sleigh 15:hyped\n" +
+                            "16:jingle 17:gottago 18:timejump 19:scritchy 20:bitnervous")
+                    
                         await self.highrise.chat("🎭 Emote Commands Part 2 [21-40]:\n" +
-                            "21:charging 22:bow 23:thumbsup 24:gagging 25:flex\n" +
-                            "26:curse 27:celebrate 28:angry 29-30:tiktok\n" +
-                            "31:shopping 32:russian 33:pennywise 34:macarena\n" +
-                            "35:blackpink 36:hyped 37:jingle 38:nervous\n" +
-                            "39:toilet 40:astronaut")
-
+                            "21:iceskating 22:partytime 23:arabesque 24:bashful 25:revelations\n" +
+                            "26:watchyourback 27:creepypuppet 28:saunter 29:surprise 30:celebration\n" +
+                            "31:penguin 32:boxer 33:airguitar 34:stargaze 35:ditzy\n" +
+                            "36:uwu 37:wrong 38:fashion 39:icecream 40:sayso")
+                    
                         await self.highrise.chat("🎭 Emote Commands Part 3 [41-60]:\n" +
-                            "41-42:astronaut 43:sword 44:time 45-46:snake\n" +
-                            "47:float 48:telekinesis 49:penguin 50:puppet\n" +
-                            "51:sleigh 52:maniac 53:energy 54-60:dance")
-
+                            "41:zombie 42:astronaut 43:punk 44:zerogravity 45:beautiful\n" +
+                            "46:omg 47:casual 48:wink 49:fightme 50:icon\n" +
+                            "51:cute 52:cutey 53:flirtywave 54:cursing 55:greedy\n" +
+                            "56:flex 57:viralgroove 58:weird 59:shuffle 60:gagging")
+                    
                         await self.highrise.chat("🎭 Emote Commands Part 4 [61-80]:\n" +
-                            "61-63:poses 64:pose1 65:pose3 66:pose5 67:cute\n" +
-                            "68:guitar 69:fashion 70gravity 71:icecream\n" +
-                            "72:wrong 73:uwu 74:tiktok 75:shy 76:anime\n" +
-                            "77:kawai 78:wild 79:skate 80:poses")
-
+                            "61:raise 62:savage 63:blackpink 64:model 65:dontstartnow\n" +
+                            "66:pennywise 67:bow 68:russian 69:curtsy 70:snowball\n" +
+                            "71:hot 72:snowangel 73:charging 74:letsgoshopping 75:confused\n" +
+                            "76:enthused 77:telekinesis 78:float 79:teleporting 80:swordfight")
+                    
                         await self.highrise.chat("🎭 Emote Commands Part 5 [81-91]:\n" +
-                            "81-87:poses 88:touch 89:guitar 90:gift 91:employee\n" +
+                            "81:maniac 82:energyball 83:worm 84:singalong 85:frog\n" +
+                            "86:lambi 87:macarena 88:kiss 89:shakehead 90:sad\n" +
+                            "91:nod 92:laughing\n" +
                             "Use: number or -loop [number] • -stop loop")
 
                     elif category == "teleport":
