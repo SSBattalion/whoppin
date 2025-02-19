@@ -200,7 +200,7 @@ class Bot(BaseBot):
     async def on_user_join(self, user: User, position: Position | AnchorPosition) -> None:
 
       try:
-         await self.highrise.send_whisper(user.id, f"\nHello {user.username},\nWelcome to 🍃 <#39FF14>FIND YOUR SOUL TIE🍃\n• !list or -list :To discover our room.")
+         await self.highrise.send_whisper(user.id, f"\nWelcome to 🌿 Find A Stoner 🌿 If you have any questions or concerns ask a moderator, other than that enjoy the room! ❤️ 🌿")
 
       except Exception as e:
             print(f"An error on user_on_join: {e}")
