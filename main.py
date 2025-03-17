@@ -21,8 +21,8 @@ from emotes import Emotes
 from emotes import Dance_Floor
 import contextlib
 
-owners = ['alionardo_','xxnormixx']
-moderators = ['alionardo_','xxnormixx']
+owners = ['alionardo_','bridewhoppin']
+moderators = ['alionardo_','bridewhoppin']
 
 
 class BotDefinition:
@@ -61,16 +61,16 @@ class Bot(BaseBot):
         self.should_stop = False
         self.announce_task = None
         self.dancer = []  # Initialize dancer list
-        self.owners =  ['alionardo_','xxnormixx']  # List of owner usernames
+        self.owners =  ['alionardo_','bridewhoppin']  # List of owner usernames
         #conversation id var
         self.convo_id_registry = []
         #dance floor position
         min_x = 2.5
-        max_x = 6.5
+        max_x = 7.5
         min_y = 0
         max_y = 1
-        min_z = 13.5
-        max_z = 17.5
+        min_z = 11.5
+        max_z = 28.5
         self.dance_floor_pos = [(min_x, max_x, min_y, max_y, min_z, max_z)]
 
     async def teleport_user_to(self, target_username: str, position: Position, location_name: str):
@@ -183,7 +183,7 @@ class Bot(BaseBot):
          Counter.bot_id = session_metadata.user_id
          print("Ali is booting ...") 
          self.dance_floor_task = asyncio.create_task(self.dance_floor())
-         self.highrise.tg.create_task(self.highrise.walk_to(Position(18.5,6.25,2, facing='FrontRight')))
+         self.highrise.tg.create_task(self.highrise.walk_to(Position(16.5,0.5,1.5, facing='FrontRight')))
          self.load_temporary_vips()
          self.load_membership()
          await asyncio.sleep(15)
@@ -200,7 +200,7 @@ class Bot(BaseBot):
     async def on_user_join(self, user: User, position: Position | AnchorPosition) -> None:
 
       try:
-         await self.highrise.send_whisper(user.id, f"\nWelcome to 🌿 Find A Stoner 🌿 If you have any questions or concerns ask a moderator, other than that enjoy the room! ❤️ 🌿")
+         await self.highrise.send_whisper(user.id, f"\nWelcome {user.username}!, If you have any questions or concerns ask a moderator, other than that enjoy the room! ❤️ 🌿")
 
       except Exception as e:
             print(f"An error on user_on_join: {e}")
@@ -857,9 +857,9 @@ class Bot(BaseBot):
 
          # Floor teleport commands
          floor_positions = {
-             'f1': (17.5, 0.25, 4.5, "Floor 1"),
-             'f2': (17.5, 6.25, 7, "Floor 2"),
-             'f3': (18.5, 12.25, 2.5, "Floor 3")
+             'f1': (14, 0, 9.5, "Floor 1"),
+             'f2': (14, 6.5, 12, "Floor 2"),
+             'f3': (14, 13, 13, "Floor 3")
          }
 
          if message.lower().startswith('-pos'):
@@ -926,7 +926,7 @@ class Bot(BaseBot):
                await self.highrise.send_whisper(user.id, "Error checking permissions.")
          if message.lower().startswith(('-v','-vip')):
              if user.username.lower() in self.membership or user.username.lower() in self.moderators:
-                await self.highrise.teleport(f"{user.id}", Position(18.5,17.5,7.5))
+                await self.highrise.teleport(f"{user.id}", Position(15.5,17.5,12))
              else:
               await self.highrise.send_whisper(user.id,"Only VIP are able use this teleport ,you can ask for mod to assist you get ur vip.")  
          if message.lower().startswith(('-mod')):
