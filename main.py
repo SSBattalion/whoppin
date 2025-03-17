@@ -956,7 +956,7 @@ class Bot(BaseBot):
                 await self.highrise.chat("Continuous emote has been stopped.")
             else:
                 await self.highrise.chat("You don't have an active loop_emote.")
-         if  message.isdigit() and 1 <= int(message) <= 91:
+         if  message.isdigit() and 1 <= int(message) <= 134:
               parts = message.split()
               E = parts[0]
               E = int(E)
