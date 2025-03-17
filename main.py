@@ -670,33 +670,45 @@ class Bot(BaseBot):
 
                     elif category == "emotes":
                         await self.highrise.chat("🎭 Emote Commands Part 1 [1-20]:\n" +
-                            "1:ignition 2:fairytwirl 3:fairyfloat 4:launch 5:cutesalute\n" +
-                            "6:atattention 7:tiktok 8:smooch 9:pushit 10:foryou\n" +
-                            "11:touch 12:kawaii 13:repose 14:sleigh 15:hyped\n" +
-                            "16:jingle 17:gottago 18:timejump 19:scritchy 20:bitnervous")
-                    
-                        await self.highrise.chat("🎭 Emote Commands Part 2 [21-40]:\n" +
-                            "21:iceskating 22:partytime 23:arabesque 24:bashful 25:revelations\n" +
-                            "26:watchyourback 27:creepypuppet 28:saunter 29:surprise 30:celebration\n" +
-                            "31:penguin 32:boxer 33:airguitar 34:stargaze 35:ditzy\n" +
-                            "36:uwu 37:wrong 38:fashion 39:icecream 40:sayso")
-                    
-                        await self.highrise.chat("🎭 Emote Commands Part 3 [41-60]:\n" +
-                            "41:zombie 42:astronaut 43:punk 44:zerogravity 45:beautiful\n" +
-                            "46:omg 47:casual 48:wink 49:fightme 50:icon\n" +
-                            "51:cute 52:cutey 53:flirtywave 54:cursing 55:greedy\n" +
-                            "56:flex 57:viralgroove 58:weird 59:shuffle 60:gagging")
-                    
-                        await self.highrise.chat("🎭 Emote Commands Part 4 [61-80]:\n" +
-                            "61:raise 62:savage 63:blackpink 64:model 65:dontstartnow\n" +
-                            "66:pennywise 67:bow 68:russian 69:curtsy 70:snowball\n" +
-                            "71:hot 72:snowangel 73:charging 74:letsgoshopping 75:confused\n" +
-                            "76:enthused 77:telekinesis 78:float 79:teleporting 80:swordfight")
-                    
-                        await self.highrise.chat("🎭 Emote Commands Part 5 [81-91]:\n" +
-                            "81:maniac 82:energyball 83:worm 84:singalong 85:frog\n" +
-                            "86:lambi 87:macarena 88:kiss 89:shakehead 90:sad\n" +
-                            "91:nod 92:laughing\n" +
+                            "1:rest 2:enthused 3:yes 4:thewave 5:tired\n" +
+                            "6:snowballfight 7:snowangel 8:shy 9:sad 10:no\n" +
+                            "11:model 12:flirtywave 13:laugh 14:kiss 15:sweating\n" +
+                            "16:hello 17:greedy 18:greedy 19:curtsy 20:confusion")
+
+                        await self.highrise.chat("🎭 Part 2 [21-40]:\n" +
+                            "21:charging 22:bow 23:thumbsup 24:tummyache 25:flex\n" +
+                            "26:cursing 27:raisetheroof 28:angry 29:savagedance 30:dontstartnow\n" +
+                            "31:letsgoshopping 32:russiandance 33:pennysdance 34:macarena 35:kpopdance\n" +
+                            "36:hyped 37:jinglebell 38:nervous 39:toilet 40:astronaut")
+
+                        await self.highrise.chat("🎭 Part 3 [41-60]:\n" +
+                            "41:astronaut 42:astronaut 43:swordfight 44:timejump 45:snake\n" +
+                            "46:snake 47:float 48:telekinesis 49:penguindance 50:creepypuppet\n" +
+                            "51:sleigh 52:maniac 53:energyball 54:astronaut 55:frog\n" +
+                            "56:superpose 57:cute 58:tiktokdance9 59:weirddance 60:tiktokdance10")
+
+                        await self.highrise.chat("🎭 Part 4 [61-80]:\n" +
+                            "61:pose7 62:pose8 63:casualdance 64:pose1 65:pose3\n" +
+                            "66:pose5 67:cutey 68:punkguitar 69:fashionista 70:gravity\n" +
+                            "71:icecreamdance 72:wrongdance 73:uwu 74:tiktokdance4 75:advancedshy\n" +
+                            "76:animedance 77:kawaii 78:scritchy 79:iceskating 80:surprisebig")
+
+                        await self.highrise.chat("🎭 Part 5 [81-100]:\n" +
+                            "81:celebrationstep 82:creepycute 83:pose10 84:boxer 85:headblowup\n" +
+                            "86:ditzypose 87:teleporting 88:touch 89:airguitar 90:thisisforyou\n" +
+                            "91:pushit 92:rest 93:zombie 94:relaxed 95:attentive\n" +
+                            "96:sleepy 97:poutyface 98:posh 99:sleepy 100:taploop")
+
+                        await self.highrise.chat("🎭 Part 6 [101-120]:\n" +
+                            "101:shy 102:bummed 103:chillin 104:annoyed 105:aerobics\n" +
+                            "106:ponder 107:heropose 108:relaxing 109:cozynap 110:boogieswing\n" +
+                            "111:feelthebeat 112:irritated 113:ibelieveicanfly 114:think 115:theatrical\n" +
+                            "116:tapdance 117:superrun 118:superpunch 119:sumofight 120:thumbsuck")
+
+                        await self.highrise.chat("🎭 Part 7 [121-134]:\n" +
+                            "121:splitsdrop 122:secrethandshake 123:ropepull 124:roll 125:rofl\n" +
+                            "126:robot 127:rainbow 128:proposing 129:peekaboo 130:peace\n" +
+                            "131:panic 132:ninjarun 133:nightfever 134:monsterfail\n" +
                             "Use: number or -loop [number] • -stop loop")
 
                     elif category == "teleport":
