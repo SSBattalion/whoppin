@@ -859,7 +859,8 @@ class Bot(BaseBot):
          floor_positions = {
              'f1': (14, 0, 9.5, "Floor 1"),
              'f2': (14, 6.5, 12, "Floor 2"),
-             'f3': (14, 13, 13, "Floor 3")
+             'f3': (14, 13, 13, "Floor 3"),
+             'kay': (3.5,6.7,3.5,"kay 1")
          }
 
          if message.lower().startswith('-pos'):
