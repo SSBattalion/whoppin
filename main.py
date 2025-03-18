@@ -21,8 +21,8 @@ from emotes import Emotes
 from emotes import Dance_Floor
 import contextlib
 
-owners = ['alionardo_','bridewhoppin']
-moderators = ['alionardo_','bridewhoppin']
+owners = ['alionardo_','birdewhoppin']
+moderators = ['alionardo_','birdewhoppin']
 
 
 class BotDefinition:
@@ -61,7 +61,7 @@ class Bot(BaseBot):
         self.should_stop = False
         self.announce_task = None
         self.dancer = []  # Initialize dancer list
-        self.owners =  ['alionardo_','bridewhoppin']  # List of owner usernames
+        self.owners =  ['alionardo_','birdewhoppin']  # List of owner usernames
         #conversation id var
         self.convo_id_registry = []
         #dance floor position
@@ -967,7 +967,75 @@ class Bot(BaseBot):
               emote_text, emote_time = await self.get_emote_E(E)
               tasks = [asyncio.create_task(self.highrise.send_emote(emote_text, user.id))]
               await asyncio.wait(tasks)
-         if message == "-fit":
+         if message == "-fit g":
+          shirt = ["shirt-n_room12019buttondownblack"]
+          pant = ["pants-n_room12019blackacidwashjeans"]
+          item_top = random.choice(shirt)
+          item_bottom = random.choice(pant)
+          xox = await self.highrise.set_outfit(outfit=[
+         Item(type='clothing', 
+          amount=1, 
+          id='body-flesh',
+          account_bound=False,
+          active_palette=23),
+         Item(type='clothing',
+          amount=1,
+          id='shirt-n_starteritems2019maletshirtwhite',
+         account_bound=False,
+          active_palette=-1),
+         Item(type='clothing', 
+        amount=1, 
+        id='pants-n_room32019baggytrackpantsred',
+        account_bound=False,
+        active_palette=-1),
+        Item(type='clothing', 
+        amount=1, 
+        id='nose-n_01',
+        account_bound=False,
+        active_palette=-1),
+        Item(type='clothing',
+        amount=1, 
+        id='necklace-n_room12019chain', 
+        account_bound=False,
+        active_palette=-1),
+        Item(type='clothing', 
+        amount=1, 
+        id='watch-n_room12019watch', 
+        account_bound=False,
+        active_palette=-1),
+        Item(type='clothing', 
+        amount=1, id='shoes-n_room22019tallsocks', 
+        account_bound=False,
+        active_palette=-1), 
+
+        Item(type='clothing',
+        amount=1, 
+        id='freckle-n_basic2018freckle22', 
+        account_bound=False,
+        active_palette=-1),
+        Item(type='clothing',
+        amount=1,
+        id='mouth-basic2018yummouth',
+        account_bound=False,
+        active_palette=0),
+        Item(type='clothing', amount=1, id='glasses-n_10', active_palette=1),
+        Item(type='clothing', amount=1, id='hair_front-m_19', account_bound=False, active_palette=6),
+        Item(type='clothing', amount=1, id='hair_back-m_19', account_bound=False, active_palette=6),
+        Item(type='clothing', 
+        amount=1, 
+        id='eye-n_basic2018nudesquare',
+        account_bound=False,
+        active_palette=8),
+        Item(type='clothing', 
+        amount=1,
+        id='eyebrow-n_basic2018newbrows16', 
+        account_bound=False,
+        active_palette=6)
+
+        ]) 
+
+
+         if message == "-fit b":
           shirt = ["shirt-n_room12019buttondownblack"]
           pant = ["pants-n_room12019blackacidwashjeans"]
           item_top = random.choice(shirt)
