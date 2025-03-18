@@ -21,8 +21,8 @@ from emotes import Emotes
 from emotes import Dance_Floor
 import contextlib
 
-owners = ['alionardo_','birdewhoppin']
-moderators = ['alionardo_','birdewhoppin']
+owners = ['alionardo_','birdiewhoppin']
+moderators = ['alionardo_','birdiewhoppin']
 
 
 class BotDefinition:
@@ -61,7 +61,7 @@ class Bot(BaseBot):
         self.should_stop = False
         self.announce_task = None
         self.dancer = []  # Initialize dancer list
-        self.owners =  ['alionardo_','birdewhoppin']  # List of owner usernames
+        self.owners =  ['alionardo_','birdiewhoppin']  # List of owner usernames
         #conversation id var
         self.convo_id_registry = []
         #dance floor position
